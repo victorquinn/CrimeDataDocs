@@ -1,0 +1,52 @@
+{
+   "endpoints":[
+      {
+         "name":"Crime Methods",
+         "methods":[
+            {
+               "MethodName":"Crimes",
+               "Synopsis":"This method allows you to retrieve a JSON Array of crimes",
+               "HTTPMethod":"GET",
+               "URI":"/crimes/:year/:month",
+               "parameters":[
+                  {
+                     "Name":"year",
+                     "Required":"Y",
+                     "Default":"2012",
+                     "Type":"string",
+                     "Description":"A full year"
+                  },
+                  {
+                     "Name":"month",
+                     "Required":"M",
+                     "Default":"01",
+                     "Type":"string",
+                     "Description":"A month"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Aggregate Methods",
+         "methods":[
+            {
+               "MethodName":"Monthly aggregate",
+               "Synopsis":"This method allows you to get monthly aggregate data",
+               "HTTPMethod":"GET",
+               "URI":"/monthly/:year",
+               "parameters":[
+                  {
+                     "Name":"year",
+                     "Required":"Y",
+                     "Default":"2012",
+                     "Type":"string",
+                     "Description":"A full year"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
+
