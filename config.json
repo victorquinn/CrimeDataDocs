@@ -1,0 +1,9 @@
+{
+    "title" : "CrimeData Documentation - http://github.com/victorquinn/CrimeData",
+    "port" : process.env.PORT || 5000,
+    "debug" : false,
+    "sessionSecret" : "12345",
+    "redis" : {
+        "host" : process.env.REDISTOGO_URL
+    }
+}
