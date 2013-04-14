@@ -38,7 +38,14 @@ var express     = require('express'),
 
 // Configuration
 try {
-    var config = require('./config.json');
+//    var config = require('./config.json');
+    var config = {
+        "title" : "CrimeData Documentation - http://github.com/victorquinn/CrimeData",
+        "port" : process.env.PORT || 5000,
+        "debug" : false,
+        "sessionSecret" : "12345"
+    };
+
 } catch(e) {
     console.error("File config.json not found or is invalid.  Try: `cp config.json.sample config.json`");
     process.exit(1);
@@ -52,11 +59,14 @@ var db;
 
 if (process.env.REDISTOGO_URL) {
     var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-    db = require("redis").createClient(rtg.port, rtg.hostname);
-    db.auth(rtg.auth.split(":")[1]);
+    var db = require("redis").createClient(rtg.port, rtg.hostname);
+    redis.auth(rtg.auth.split(":")[1]); 
+
+    config.redis.host = rtg.hostname;
+    config.redis.port = rtg.port;
+    config.redis.password = rtg.auth.split(":")[1];
 } else {
-    db = redis.createClient(config.redis.port, config.redis.host);
-    db.auth(config.redis.password);
+    var db = require("redis").createClient(); 
 }
 
 db.on("error", function(err) {
@@ -80,13 +90,6 @@ try {
 }
 
 var app = module.exports = express.createServer();
-
-if (process.env.REDISTOGO_URL) {
-    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-    config.redis.host = rtg.hostname;
-    config.redis.port = rtg.port;
-    config.redis.password = rtg.auth.split(":")[1];
-}
 
 app.configure(function() {
     app.set('views', __dirname + '/views');
