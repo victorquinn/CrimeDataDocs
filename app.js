@@ -60,11 +60,13 @@ var db;
 if (process.env.REDISTOGO_URL) {
     var rtg   = require("url").parse(process.env.REDISTOGO_URL);
     var db = require("redis").createClient(rtg.port, rtg.hostname);
-    redis.auth(rtg.auth.split(":")[1]); 
 
     config.redis.host = rtg.hostname;
     config.redis.port = rtg.port;
     config.redis.password = rtg.auth.split(":")[1];
+
+    redis.auth(config.redis.password); 
+
 } else {
     var db = require("redis").createClient(); 
 }
