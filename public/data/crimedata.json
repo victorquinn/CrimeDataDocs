@@ -14,7 +14,7 @@
                      "Required":"Y",
                      "Default":"2012",
                      "Type":"string",
-                     "Description":"A full year"
+                     "Description":"A year"
                   },
                   {
                      "Name":"month",
@@ -22,6 +22,13 @@
                      "Default":"01",
                      "Type":"string",
                      "Description":"A month"
+                  },
+                  {
+                     "Name":"day",
+                     "Required":"Y",
+                     "Default":"01",
+                     "Type":"string",
+                     "Description":"A day"
                   }
                ]
             }
